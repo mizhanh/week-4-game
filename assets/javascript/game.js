@@ -15,6 +15,8 @@ $(document).ready(function() {
 	var losses = 0;
 	var counterTotal = 0;
 	var targetNumber = 0;
+	var crystalValue = 0;
+
 
 //=====================================================================
 
@@ -32,7 +34,11 @@ $(document).ready(function() {
 		valueRuby = 0;
 		valueSapphire = 0;
 		valueEmerald = 0;
-		$("#score").empty();		
+		$("#score").empty();
+		setDiamondValue();
+		setRubyValue();
+		setSapphireValue();
+		setEmeraldValue();				
 }
 
 //Generate a random number to set target for the round
@@ -44,6 +50,37 @@ $(document).ready(function() {
 		}	
 	}	
 
+//Generate a random value for diamond
+	function setDiamondValue() {
+		for (var i=0; i<12; i++) {
+			var random = Math.floor((Math.random() * 12) + 1);
+			crystalDia = random;
+		}
+	}
+
+//Generate a random value for ruby
+	function setRubyValue() {
+		for (var i=0; i<12; i++) {
+			var random = Math.floor((Math.random() * 12) + 1);
+			crystalRuby = random;
+		}
+	}
+
+//Generate a random value for sapphire
+	function setSapphireValue() {
+		for (var i=0; i<12; i++) {
+			var random = Math.floor((Math.random() * 12) + 1);
+			crystalSap = random;
+		}
+	}
+
+//Generate a random value for Emerald
+	function setEmeraldValue() {
+		for (var i=0; i<12; i++) {
+			var random = Math.floor((Math.random() * 12) + 1);
+			crystalEme = random;
+		}
+	}
 
 //Progress evaluation
 	function evaluate(){
@@ -51,15 +88,17 @@ $(document).ready(function() {
 			wins++;
 	 		$("#wins").text("Wins: " + wins);
 	 		alert("You win!");
+	 		setTarget();
 	 		reset();
-	 		setTarget();	 		
+	 			 		
 		}
 		else if (counterTotal > targetNumber) {
 			losses++;
 			alert("You Lose!");
  			$("#losses").text("Loses: " +  losses);
- 			reset();
- 			setTarget();			
+ 			setTarget();
+ 			reset();	
+ 					
 		}	
 	}
 //===========================================================================	
@@ -68,15 +107,12 @@ $(document).ready(function() {
 //===========================================================================
 	reset();
 	setTarget();
-
-		//Generate random value for diamond
-		for (var i=0; i<12; i++) {
-			var imageDiamond = $(".diamond-image");
-			var random = Math.floor((Math.random() * 12) + 1);	
-			imageDiamond.attr("data-diamondvalue", random);	
-		}
+			
+	
 		//Assign the random value to the diamond image when click
 		$(".diamond-image").on("click", function() {
+			var imageDiamond = $(".diamond-image");		
+			imageDiamond.attr("data-diamondvalue", crystalDia);	
 			valueDiamond = ($(this).attr("data-diamondvalue"));
 			valueDiamond = parseInt(valueDiamond);
 			counterDia += valueDiamond;
@@ -85,15 +121,12 @@ $(document).ready(function() {
 			evaluate();
 		});
 		
-
-		//Generate random value for ruby
-		for (var i=0; i<12; i++) {
-			var imageRuby = $(".ruby-image");
-			var random = Math.floor((Math.random() * 12) + 1);	
-			imageRuby.attr("data-rubyvalue", random);	
-		}
+	
 		//Assign the random value to the ruby image when click
 		$(".ruby-image").on("click", function() {
+			//setValue();
+			var imageRuby = $(".ruby-image");
+			imageRuby.attr("data-rubyvalue", crystalRuby);
 			valueRuby = ($(this).attr("data-rubyvalue"));
 			valueRuby = parseInt(valueRuby);
 			counterRuby += valueRuby;
@@ -102,15 +135,12 @@ $(document).ready(function() {
 			evaluate();	
 		});
 
-		
-		//Generate random value for sapphire
-		for (var i=0; i<12; i++) {
-			var imageSapphire = $(".sapphire-image");
-			var random = Math.floor((Math.random() * 12) + 1);	
-			imageSapphire.attr("data-sapphirevalue", random);	
-		}
+	
 		//Assign the random value to the ruby image when click
 		$(".sapphire-image").on("click", function() {
+			//setValue();
+			var imageSapphire = $(".sapphire-image");
+			imageSapphire.attr("data-sapphirevalue", crystalSap);
 			valueSapphire = ($(this).attr("data-sapphirevalue"));
 			valueSapphire = parseInt(valueSapphire);
 			counterSap += valueSapphire;
@@ -120,14 +150,11 @@ $(document).ready(function() {
 		});
 
 		
-		//Generate random value for sapphire
-		for (var i=0; i<12; i++) {
-			var imageEmerald = $(".emerald-image");
-			var random = Math.floor((Math.random() * 12) + 1);	
-			imageEmerald.attr("data-emeraldvalue", random);	
-		}
 		//Assign the random value to the ruby image when click
 		$(".emerald-image").on("click", function() {
+			//setValue();
+			var imageEmerald = $(".emerald-image");
+			imageEmerald.attr("data-emeraldvalue", crystalEme);
 			valueEmerald = ($(this).attr("data-emeraldvalue"));
 			valueEmerald = parseInt(valueEmerald);
 			counterEme += valueEmerald;
